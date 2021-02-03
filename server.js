@@ -1,7 +1,8 @@
   
 const express = require('express');
 const mongoose = require('mongoose');
-const logger = require("morgan");
+const logger = require('morgan');
+const Workout = require('./models/workouts');
 const path = require("path");
 
 const PORT = process.env.PORT || 8080;
@@ -20,6 +21,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', {
   useCreateIndex: true,
 });
 
+require('./routes/apiRoutes')(app);
+require('./routes/htmlRoutes')(app);
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}`);
